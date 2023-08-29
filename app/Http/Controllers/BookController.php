@@ -179,14 +179,14 @@ class BookController extends Controller
         ->get();
         // $getbooks = Books::all();
         $getusers = User::all();
-        // dd($books);
-
+        
         return view('books.sell_book', compact('getbooks','getusers', 'page_title'));
     }
 
     public function bookSell(Request $request){
-
+        
         $dataArray = BookStock::where('id', $request->Book_id)->get()->first();
+        // dd($dataArray);
         $dataArray->status = 0;
         $dataArray->update();
 
@@ -197,5 +197,20 @@ class BookController extends Controller
         $result = $data->save();
 
         return redirect(url('sell_book'))->with('success', 'Book Sell Successfully.');
+    }
+
+
+    public function BookHistory(){
+        $page_title = 'Book History';
+
+        $sellbookshistory = DB::table('book_histories')
+        ->Join('books', 'books.id','=','book_histories.book_stock_id')
+        ->Join('users', 'users.id','=','book_histories.user_id')
+        ->get();
+
+        // dd($getbooks);
+
+        return view('books.sell_book_history', compact('sellbookshistory', 'page_title'));
+
     }
 }

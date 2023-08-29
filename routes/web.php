@@ -35,9 +35,10 @@ Route::get('/view_books', [BookController::class, 'ViewBook'])->name('view.book'
 Route::get('/edit_books/{id}', [BookController::class, 'EditBook'])->name('edit.book');
 Route::post('/update_book', [BookController::class, 'UpdateBook'])->name('update.book');
 Route::get('/delete_book/{id}', [BookController::class, 'DeleteBook'])->name('delete.book');
+Route::get('/book_history', [BookController::class, 'BookHistory'])->name('book.history');
 
 Route::get('/sell_book', [BookController::class, 'SellBook'])->name('sell.book');
-Route::get('/sell', [BookController::class, 'bookSell'])->name('book.sell');
+Route::post('/sell', [BookController::class, 'bookSell'])->name('book.sell');
 Route::get('/book_stock', [BookController::class, 'BookStock'])->name('book.stock');
 Route::get('/view_stock/{id}', [BookController::class, 'ViewBookStock'])->name('view.stock');
 Route::get('/delete_book_stock/{id}', [BookController::class, 'DeleteBookstock'])->name('delete.book_stock');
