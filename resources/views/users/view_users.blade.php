@@ -31,7 +31,7 @@
             <!--begin::Button-->
             <a
                 href="{{ url('add_user') }}"
-                class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#exampleModal"
+                class="btn btn-primary font-weight-bolder"
             >
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->

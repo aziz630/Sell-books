@@ -87,7 +87,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							</form>
 							<div class="mt-10">
 								<span class="opacity-40 mr-4">Don't have an account yet?</span>
-								<a href="{{ route('register') }}" id="" class="text-white opacity-30 font-weight-normal">Sign Up</a>
+								<a href="{{  }}" id="" class="text-white opacity-30 font-weight-normal">Sign Up</a>
 							</div>
 						</div>
 						<!--end::Login Sign in form-->

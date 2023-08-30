@@ -16,12 +16,16 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+Route::get('/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 Route::get('/dashboard', function () {
-    $page_title = '';
+    $page_title = 'Admin Dashboard';
     
     return view('admin.index', compact('page_title'));
 })->middleware(['auth'])->name('dashboard');
