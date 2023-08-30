@@ -80,7 +80,7 @@
                 <th>Book Title</th>
                 <th>Author</th>
                 <th>Publisher</th>
-                {{-- <th>Quantity</th> --}}
+                <th>Quantity</th>
                 {{-- <th>Year</th>
                 <th>Picture</th> --}}
                 <th>Action</th>
@@ -94,12 +94,12 @@
 
                 <tr>
                 <td>{{$key}}</td>
-                   <td>{{ $stock[0]->book_title }}</td>
-                   <td>{{ $stock[0]->author }}</td>
-                   <td>{{ $stock[0]->publisher }}</td>
-                   {{-- <td>{{ $stock[0]->count }}</td> --}}
+                   <td>{{ $stock->book_title }}</td>
+                   <td>{{ $stock->author }}</td>
+                   <td>{{ $stock->publisher }}</td>
+                   <td>{{ $stock->totalQty }}</td>
                     <td> 
-                        <a href="{{ route('view.stock', $stock[0]->book_id) }}" class="btn btn-sm btn-success btn-pill" title="Edit details">View</a>
+                        <a href="{{ route('view.stock', $stock->book_id) }}" class="btn btn-sm btn-success btn-pill" title="Edit details">View</a>
                     </td>
                     
                 </tr>

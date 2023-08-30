@@ -128,9 +128,9 @@ class BookController extends Controller
         $page_title = 'Books Stock';
         $bookStocks = DB::table('book_stocks')
         ->Join('books', 'books.id','=','book_stocks.book_id')
-        // ->select(DB::raw("count(book_stocks.book_id) as count"))
-        ->get()
-        ->groupBy('book_id');
+        ->select('book_stocks.*', 'books.*','book_id', DB::raw('count(*) as totalQty'))
+        ->groupBy('book_id')
+        ->get();
 
         // dd($bookStocks);
         
