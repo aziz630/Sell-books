@@ -56,7 +56,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/Accept_order/{id}', [BookController::class, 'Accept_Order'])->name('accept.order');
     
     
-    
     // User Routes
     Route::get('/add_user', [UserController::class, 'AddUser'])->name('add.user');
     Route::post('/save_user', [UserController::class, 'SaveUser'])->name('save.user');

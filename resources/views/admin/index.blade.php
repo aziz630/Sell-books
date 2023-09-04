@@ -27,7 +27,7 @@
                     <!--end::Actions-->
                     <!--begin::Daterange-->
                     <a href="#" class="btn btn-sm btn-light font-weight-bold mr-2" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
-                        <span class="text-muted font-size-base font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Todayyy</span>
+                        <span class="text-muted font-size-base font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Today</span>
                         <span class="text-primary font-size-base font-weight-bolder" id="kt_dashboard_daterangepicker_date">Aug 16</span>
                     </a>
                     <!--end::Daterange-->
@@ -111,7 +111,7 @@
                                                 </svg> --}}
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <a href="#" class="text-warning font-weight-bold font-size-h6">Total Books <span style="float: right; font-size: 20px">5</span></a>
+                                            <a href="#" class="text-warning font-weight-bold font-size-h6">Total Books <span style="float: right; font-size: 20px">{{ $get_all_books }}</span></a>
                                             
                                         </div>
                                         <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
@@ -126,7 +126,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">ToTal Users <span style="float: right; font-size: 20px">5</span></a>
+                                            <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">ToTal Users <span style="float: right; font-size: 20px">{{ $get_all_Users }}</span></a>
                                         </div>
                                     </div>
                                     <!--end::Row-->
@@ -144,7 +144,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Sold Books</a>
+                                            <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Sold Books <span style="float: right; font-size: 20px">{{ $get_sold_books }}</span></a>
                                         </div>
                                         <div class="col bg-light-success px-6 py-8 rounded-xl">
                                             <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
