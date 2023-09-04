@@ -28,6 +28,10 @@ Route::get('/dashboard', function () {
     return view('admin.index', compact('page_title'));
 })->middleware(['auth'])->name('dashboard');
 Route::post('/search_book', [BookController::class, 'getAllBooks'])->name('search.book');
+Route::get('/buy/{id}', [BookController::class, 'BuyBook'])->name('buy.book');
+Route::post('/sell', [BookController::class, 'bookSell'])->name('book.sell');
+Route::get('/sell_book', [BookController::class, 'SellBook'])->name('sell.book');
+Route::post('/place_order', [BookController::class, 'Place_Order'])->name('place.order');
 
 require __DIR__.'/auth.php';
 
@@ -44,14 +48,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/book_history', [BookController::class, 'BookHistory'])->name('book.history');
     Route::get('/panding_orders', [BookController::class, 'PandingOrders'])->name('panding.orders');
     
-    Route::get('/sell_book', [BookController::class, 'SellBook'])->name('sell.book');
-    Route::post('/sell', [BookController::class, 'bookSell'])->name('book.sell');
-    Route::get('/buy/{id}', [BookController::class, 'BuyBook'])->name('buy.book');
     Route::get('/book_stock', [BookController::class, 'BookStock'])->name('book.stock');
     Route::get('/view_stock/{id}', [BookController::class, 'ViewBookStock'])->name('view.stock');
     Route::get('/delete_book_stock/{id}', [BookController::class, 'DeleteBookstock'])->name('delete.book_stock');
     
-    Route::post('/place_order', [BookController::class, 'Place_Order'])->name('place.order');
     Route::get('/Reject_order/{id}', [BookController::class, 'Reject_Order'])->name('reject.order');
     Route::get('/Accept_order/{id}', [BookController::class, 'Accept_Order'])->name('accept.order');
     
