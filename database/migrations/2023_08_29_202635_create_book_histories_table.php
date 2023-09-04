@@ -17,6 +17,8 @@ class CreateBookHistoriesTable extends Migration
             $table->id();
             $table->string('book_stock_id')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('status')->nullable();
+            $table->string('quantity')->nullable();
             $table->string('date')->nullable();
             $table->timestamps();
         });

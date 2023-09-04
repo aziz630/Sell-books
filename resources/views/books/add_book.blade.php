@@ -87,6 +87,17 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Price </label>
+                            <input type="text" name="price" class="form-control form-control-solid" placeholder="Enter Book Price"
+                                value="{{ old('price') }}"
+                            />
+                            <span class="form-text text-muted"
+                                >Please enter Book Price.</span
+                            >
+                        </div>
+                    </div>
                     <div class="col-xl-6">
                         <!--begin::Input-->
                         <div class="form-group">

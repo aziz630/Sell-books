@@ -5,7 +5,7 @@
 	<!--begin::Head-->
 	<head><base href="../../">
 		<meta charset="utf-8" />
-		<title>Books Library</title>
+		<title>Buy Books</title>
 		<meta name="description" content="No aside layout examples" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -79,7 +79,7 @@
 								<!--begin::Header Logo-->
 								<div class="header-logo">
 									<a href="index.html">
-										<h4 style="color: black; text-transform: uppercase;" ><b> Old Bookstore </b></h4> 
+										<h4 style="color: black; text-transform: uppercase;"><b> Old Bookstore </b></h4> 
 									</a>
 								</div>
 								<!--end::Header Logo-->
@@ -204,7 +204,7 @@
 									@auth
 									<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->name }}</span>
+										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
 										<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
 											<span class="symbol-label font-size-h5 font-weight-bold">S</span>
 										</span>
@@ -251,15 +251,12 @@
 									</div>
 									<!--end::Page Heading-->
 								</div>
-
-
-								
 								<!--end::Info-->
 								<!--begin::Toolbar-->
 								<div class="d-flex align-items-center">
 									<!--begin::Actions-->
 									<a href="#" class="btn btn-sm btn-light font-weight-bold mr-2" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
-										<span class="text-muted font-size-base font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Today</span>
+										<span class="text-muted font-size-base font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Todayyy</span>
 										<span class="text-primary font-size-base font-weight-bolder" id="kt_dashboard_daterangepicker_date">Aug 16</span>
 									</a>
 									<!--end::Actions-->
@@ -286,76 +283,132 @@
 							</div>
 						</div>
 						<!--end::Subheader-->
-						
 						<!--begin::Entry-->
-						@include('alerts.alerts')
-
 						<div class="d-flex flex-column-fluid">
+
+
 							<!--begin::Container-->
+                            
 							<div class="container">
 								<!--begin::Dashboard-->
-								<form action="{{ url('search_book') }}" method="post">
-								<div class="row">
-										@csrf
-									<div class="col-md-2"></div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" name="search" required="required" placeholder="Search Book"
-											value="{{ $search_field }}">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<button type="submit" class="btn btn-primary btn-pill add_student">Search</button>
-		
-									</div>
-		
-								</div>
-							</form>
 								<!--begin::Row-->
-								<div class="row">
-									@foreach($get_all_books as $key => $book)
-									
-									<div class="col-xl-4">
-										<!--begin::Nav Panel Widget 3-->
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body">
-												<!--begin::Wrapper-->
-												<div class="d-flex justify-content-between flex-column h-100">
-													<!--begin::Container-->
-													<div class="h-100">
-														<!--begin::Header-->
-														<div class="d-flex flex-column flex-center">
-															<!--begin::Image-->
-															<div class="bgi-no-repeat bgi-size-cover rounded min-h-200px w-100" style="background-image: url({{ asset('upload/book_img/'.$book->photo) }})"></div>
-															<!--end::Image-->
-															<!--begin::Title-->
-															<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{ $book->book_title }}</a>
-															<!--end::Title-->
-															<!--begin::Text-->
-															<div class="font-weight-bold text-dark-50 font-size-sm pb-7">{{ $book->author }}</div>
-															<!--end::Text-->
-														</div>
-														<!--end::Header-->
-														
-													</div>
-													<!--eng::Container-->
-													<!--begin::Footer-->
-													<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-														<a href="{{ route('buy.book', $book->id) }}" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">Buy Book</a>
-													</div>
-													<!--end::Footer-->
-												</div>
-												<!--end::Wrapper-->
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+
+                                    <div class="col-lg-8">
+										<!--begin::Card-->
+										<div class="card card-custom gutter-b example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">{{ $book[0]['book_title'] }} Book  <small style="padding-left: 50px"><span>Please Make Sure Your Detail is Correct.</span></small></h3>
+												
 											</div>
-											<!--end::Body-->
+											<!--begin::Form-->
+											<form class="form" action="{{ url('place_order') }}" method="post">
+                                            @csrf
+
+                                                <input type="hidden" name="stock_id" value="{{ $book[0]['stock_id'] }}">
+                                                <input type="hidden" name="book_id" value="{{ $book[0]['book_id'] }}">
+												<div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                           <h5><b>Book</b></h5> 
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h3><b>User</b></h3> 
+
+                                                        </div>
+                                                        <br><hr><br>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-md-2">
+                                                            Book Title :
+                                                        </div>  
+                                                        <div class="col-md-4">
+                                                            <b>{{ $book[0]['book_title'] }}</b>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            User's Name :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <b>{{ Auth::user()->name }}</b>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            Book Author  :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <b>{{ $book[0]['author'] }}</b>
+                                                        </div>
+
+                                                        <div class="col-md-2">
+                                                            User's Email :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <b>{{ Auth::user()->email }}</b>
+                                                        </div>
+                                                      
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            Book Price :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <b>{{ $book[0]['price'] }}</b>
+                                                        </div>
+                                                      
+                                                        <div class="col-md-2">
+                                                            User's Phone :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <b>{{ Auth::user()->phone }}</b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-header">
+
+                                                        <h3 class="card-title">  </h3>
+                                                    </div>
+                                                  
+                                                    <div class="row">
+                                                      
+                                                        <div class="col-md-3">
+                                                            Select Quantity :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                {{-- <label for="recipient-name" class="col-form-label">Book Title:</label><span class="text-danger">*</span> --}}
+                                                                <input type="number" class="form-control" min="1" name="quantity" value="1" required="required" placeholder="Select Quantity">
+                                                                {{-- <span class="form-text text-muted">Please enter book title</span> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    
+												</div>
+												
+												
+
+												<div class="card-footer">
+													<button type="submit" class="btn btn-primary mr-2">Place Order</button>
+													<a href="{{ url('/') }}" class="btn btn-secondary">Cancel</a>
+												</div>
+											</form>
+											<!--end::Form-->
 										</div>
-										<!--end::Nav Panel Widget 3-->
+										<!--end::Card-->
+										
 									</div>
+                                    
+                                </div>
 
-									@endforeach
+                                
 
-								</div>
+
+							
+
 								<!--end::Row-->
 								<!--end::Dashboard-->
 							</div>
@@ -370,8 +423,8 @@
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted font-weight-bold mr-2">2020©</span>
-								<a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Keenthemes</a>
+								<span class="text-muted font-weight-bold mr-2">2023©</span>
+								<a href="$" target="_blank" class="text-dark-75 text-hover-primary">Buy Book</a>
 							</div>
 							<!--end::Copyright-->
 							<!--begin::Nav-->
@@ -391,68 +444,69 @@
 			<!--end::Page-->
 		</div>
 		<!--end::Main-->
-	<!-- begin::User Panel-->
-	@if (Route::has('login'))
-	@auth
-	<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
-		<!--begin::Header-->
-		<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-			<h3 class="font-weight-bold m-0">User Profile
-			<small class="text-muted font-size-sm ml-2"></small></h3>
-			<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
-				<i class="ki ki-close icon-xs text-muted"></i>
-			</a>
-		</div>
-		<!--end::Header-->
-		<!--begin::Content-->
-		<div class="offcanvas-content pr-5 mr-n5">
+		<!-- begin::User Panel-->
+		<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 			<!--begin::Header-->
-			<div class="d-flex align-items-center mt-5">
-				<div class="symbol symbol-100 mr-5">
-					<div class="symbol-label" style="background-image:url('{{ !empty(Auth::user()->photo) ? asset('upload/user_img/'.Auth::user()->photo) :  asset('upload/no_image.jpg') }}')"></div>
-					<i class="symbol-badge bg-success"></i>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->name }}</a>
-					<div class="text-muted mt-1">Book Store User</div>
-					<div class="navi mt-2">
-						<a href="#" class="navi-item">
-							<span class="navi-link p-0 pb-2">
-								<span class="navi-icon mr-1">
-									<span class="svg-icon svg-icon-lg svg-icon-primary">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg-->
-										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24" />
-												<path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000" />
-												<circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5" />
-											</g>
-										</svg>
-										<!--end::Svg Icon-->
-									</span>
-								</span>
-								<span class="navi-text text-muted text-hover-primary">{{ Auth::user()->email }}</span>
-							</span>
-						</a>
-						<a href="{{ route('admin.logout') }}" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
-					</div>
-				</div>
+			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
+				<h3 class="font-weight-bold m-0">User Profile
+				<small class="text-muted font-size-sm ml-2">12 messages</small></h3>
+				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
+					<i class="ki ki-close icon-xs text-muted"></i>
+				</a>
 			</div>
 			<!--end::Header-->
-			<!--begin::Separator-->
-			<div class="separator separator-dashed mt-8 mb-5"></div>
-			<!--end::Separator-->
-			
-			<!--begin::Separator-->
-			<div class="separator separator-dashed my-7"></div>
-			<!--end::Separator-->
+			<!--begin::Content-->
+			<div class="offcanvas-content pr-5 mr-n5">
+				<!--begin::Header-->
+				<div class="d-flex align-items-center mt-5">
+					<div class="symbol symbol-100 mr-5">
+						<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+						<i class="symbol-badge bg-success"></i>
+					</div>
+					<div class="d-flex flex-column">
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
+						<div class="text-muted mt-1">Application Developer</div>
+						<div class="navi mt-2">
+							<a href="#" class="navi-item">
+								<span class="navi-link p-0 pb-2">
+									<span class="navi-icon mr-1">
+										<span class="svg-icon svg-icon-lg svg-icon-primary">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg-->
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24" />
+													<path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000" />
+													<circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5" />
+												</g>
+											</svg>
+											<!--end::Svg Icon-->
+										</span>
+									</span>
+									<span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+								</span>
+							</a>
+							<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
+						</div>
+					</div>
+				</div>
+				<!--end::Header-->
 		
+	
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop">
+			<span class="svg-icon">
+				<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Up-2.svg-->
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<polygon points="0 0 24 0 24 24 0 24" />
+						<rect fill="#000000" opacity="0.3" x="11" y="10" width="2" height="10" rx="1" />
+						<path d="M6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 C4.90236893,12.3165825 4.90236893,11.6834175 5.29289322,11.2928932 L11.2928932,5.29289322 C11.6714722,4.91431428 12.2810586,4.90106866 12.6757246,5.26284586 L18.6757246,10.7628459 C19.0828436,11.1360383 19.1103465,11.7686056 18.7371541,12.1757246 C18.3639617,12.5828436 17.7313944,12.6103465 17.3242754,12.2371541 L12.0300757,7.38413782 L6.70710678,12.7071068 Z" fill="#000000" fill-rule="nonzero" />
+					</g>
+				</svg>
+				<!--end::Svg Icon-->
+			</span>
 		</div>
-		<!--end::Content-->
-	</div>
-	<!-- end::User Panel-->
-	@endauth
-	@endif
+		<!--end::Scrolltop-->
 	
 		
 		<script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>

@@ -7,10 +7,35 @@ use App\Models\Books;
 use App\Models\User;
 use App\Models\BookStock;
 use App\Models\BookHistory;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class BookController extends Controller
 {
+
+    public function getAllBooks(Request $request){
+        // $validated = $request->validate([
+        //     'search' => 'search',
+        // ]);
+       
+
+        
+        $page_title = 'Book';
+        
+        if($request->search != null){
+            // $get_all_books = Books::all();?
+            $get_all_books = Books::where('book_title', $request->search)
+            ->orWhere('book_title', 'like', '%' . $request->search . '%')->get();
+
+        }else{
+            $get_all_books = Books::all();
+
+        }
+
+        $search_field = $request->search;
+
+        return view('welcome', compact('page_title', 'get_all_books', 'search_field'));
+    }
 
     public function AddBook(){
         $page_title = 'Add Book';
@@ -27,6 +52,7 @@ class BookController extends Controller
         $data->publisher = $request->publisher;
         $data->Place_of_publisher = $request->Place_of_publisher;
         $data->year = $request->year;
+        $data->price = $request->price;
         
         if($request->file('photo')){
             $image = $request->file('photo');
@@ -87,6 +113,7 @@ class BookController extends Controller
         $data->publisher = $request->publisher;
         $data->Place_of_publisher = $request->Place_of_publisher;
         $data->year = $request->year;
+        $data->price = $request->price;
         
         if($request->file('photo')){
             $image = $request->file('photo');
@@ -141,7 +168,6 @@ class BookController extends Controller
 
 
     public function ViewBookStock($id){
-// dd('yes');
         
         $page_title = 'View Book Stock';
        
@@ -194,6 +220,7 @@ class BookController extends Controller
         $data->user_id = $request->user_id;
         $data->book_stock_id = $request->Book_id;
         $data->date = date('Y-m-d');
+        $data->status = 0;
         $result = $data->save();
 
         return redirect(url('sell_book'))->with('success', 'Book Sell Successfully.');
@@ -206,6 +233,7 @@ class BookController extends Controller
         $sellbookshistory = DB::table('book_histories')
         ->Join('books', 'books.id','=','book_histories.book_stock_id')
         ->Join('users', 'users.id','=','book_histories.user_id')
+        ->where('book_histories.status', 1)
         ->get();
 
         // dd($getbooks);
@@ -213,4 +241,93 @@ class BookController extends Controller
         return view('books.sell_book_history', compact('sellbookshistory', 'page_title'));
 
     }
+
+    public function PandingOrders(){
+        $page_title = 'Panding Orders';
+
+        $pandingorders = DB::table('book_histories')
+        ->Join('books', 'books.id','=','book_histories.book_stock_id')
+        ->Join('users', 'users.id','=','book_histories.user_id')
+        ->where('book_histories.status', 0)
+        ->get();
+
+        // dd($pandingorders);
+
+        return view('books.panding_orders', compact('pandingorders', 'page_title'));
+
+    }
+
+    public function Reject_Order(Request $request, $id){
+
+        // $data = BookHistory::find($id);
+        $data = BookHistory::where('book_stock_id', $id)->get()->first();
+
+        if ($data != null) {
+
+            $dataArray = BookStock::where('book_id', $id)->where('status', 0)->get()->first();
+            $dataArray->status = 1;
+            $dataArray->update();
+
+            $data->delete();
+ 
+            return redirect()->back()->with('error', 'Order Rejected Successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Wrong Id.');
+    }
+
+    public function Accept_Order(Request $request, $id){
+
+        $data = BookHistory::where('book_stock_id', $id)->where('status', 0)->get()->first();
+        
+        if ($data != null) {
+
+            $data->status = 1;
+            $data->update();
+            
+ 
+            return redirect()->back()->with('success', 'Order Accepted Successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Order Not Accepted.');
+    }
+
+
+    public function BuyBook($id){
+        $page_title = 'Buy Book';
+
+        // $book = Books::where('id', $id)->get()->toArray();
+
+        $book = BookStock::select('books.*','book_stocks.id as stock_id', 'book_stocks.book_id')
+        ->Join('books', 'books.id','=','book_stocks.book_id')
+        ->where('book_stocks.book_id', $id)
+        ->groupBy('book_id')
+        ->get();
+
+        // dd($book);
+
+        return view('books.buy_book', compact('page_title', 'book'));
+
+    }
+
+    public function Place_Order(Request $request){
+
+        // dd($request->stock_id);
+
+        $dataArray = BookStock::where('id', $request->stock_id)->get()->first();
+        $dataArray->status = 0;
+        $dataArray->update();
+
+        $data = new BookHistory();
+        $data->user_id = Auth::user()->id;
+        $data->book_stock_id = $request->book_id;
+        $data->status = 0;
+        $data->quantity = $request->quantity;
+        $data->date = date('Y-m-d');
+
+        // dd($data);
+        $result = $data->save();
+
+        return redirect(url('/'))->with('success', 'Your Order Is Placed Successfully. Admin will contact you soon');
+    } 
 }

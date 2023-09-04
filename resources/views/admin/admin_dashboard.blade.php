@@ -109,7 +109,7 @@
 				<!--begin::Header-->
 				<div class="d-flex align-items-center mt-5">
 					<div class="symbol symbol-100 mr-5">
-						<div class="symbol-label" style="background-image:url('{{ !empty(Auth::user()->photo) ? asset('upload/user_img/'.Auth::user()->photo) :  asset('upload/no_image') }}')"></div>
+						<div class="symbol-label" style="background-image:url('{{ !empty(Auth::user()->photo) ? asset('upload/user_img/'.Auth::user()->photo) :  asset('upload/no_image.jpg') }}')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">

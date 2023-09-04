@@ -71,17 +71,17 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label>Quantity </label>
-                            <input type="number" name="quantity" class="form-control form-control-solid" placeholder="Enter Quantity"
-                                value="{{ old('quantity') }}"
+                            <label>Price </label>
+                            <input type="text" name="price" class="form-control form-control-solid" required="required" value="{{ $book[0]['price'] }}" placeholder="Enter Book Price"
+                                value="{{ old('price') }}"
                             />
                             <span class="form-text text-muted"
-                                >Please enter Quantity.</span
+                                >Please enter Book Price.</span
                             >
                         </div>
-                    </div> --}}
+                    </div>
                    
                     
                 </div>

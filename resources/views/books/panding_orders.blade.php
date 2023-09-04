@@ -9,7 +9,7 @@
                 <i class="flaticon-search text-primary"></i>
             </span>
             <h3 class="card-label">
-                {{ __("Sold Books History ") }} <small>Filteration enabled</small>
+                {{ __("Books Pending Orders  ") }} <small>Filteration enabled</small>
             </h3>
         </div>
         <div class="card-toolbar">
@@ -49,17 +49,17 @@
                 <th>Accession No</th>
                 <th>Book Title</th>
                 <th>Book Author</th>
-                <th>User Name</th>
-                <th>User Phone</th>
-                <th>User Address</th>
+                <th>Buyer's Name</th>
+                <th>Buyer's Phone</th>
+                <th>Buyer's Address</th>
                 {{-- <th>Picture</th> --}}
-                {{-- <th>Action</th> --}}
+                <th>Action</th>
                 <!-- <th>Actions</th> -->
             </tr>
         </thead>
         <tbody>
 
-            @foreach($sellbookshistory as $key => $book)
+            @foreach($pandingorders as $key => $book)
                 <tr>
                 <td>{{$key+1}}</td>
                    <td>{{ 'Acc - '.$book->book_stock_id }}</td>
@@ -70,7 +70,10 @@
                    <td>{{ $book->address }}</td>
                    {{-- <td><img src="{{ asset('upload/book_img/'.$book->photo) }}" style="height: 50px;width:100px;" alt=""></td> --}}
                   
-                  
+                   <td> 
+                    <a href="{{ route('accept.order', $book->book_stock_id) }}" class="btn btn-sm btn-success btn-pill" onClick="return confirm('Are you sure you want to Accep This Order?')" title="Edit details">Accept Order</a>
+                    <a href="{{ route('reject.order', $book->book_stock_id) }}" class="btn btn-sm btn-danger btn-pill" onClick="return confirm('Are you sure you want to Reject This Orrder?')" title="Delete">Reject Order</a>
+                </td>
                     
                 </tr>
             @endforeach

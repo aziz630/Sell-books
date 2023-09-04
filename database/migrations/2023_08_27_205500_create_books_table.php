@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('year')->nullable();
             $table->string('photo')->nullable();
             $table->string('quantity')->nullable();
+            $table->string('price')->nullable();
             $table->timestamps();
         });
     }
