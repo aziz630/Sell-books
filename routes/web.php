@@ -28,10 +28,10 @@ Route::get('/dashboard', function () {
     return view('admin.index', compact('page_title'));
 })->middleware(['auth'])->name('dashboard');
 Route::post('/search_book', [BookController::class, 'getAllBooks'])->name('search.book');
-Route::get('/buy/{id}', [BookController::class, 'BuyBook'])->name('buy.book');
 Route::post('/sell', [BookController::class, 'bookSell'])->name('book.sell');
 Route::get('/sell_book', [BookController::class, 'SellBook'])->name('sell.book');
 Route::post('/place_order', [BookController::class, 'Place_Order'])->name('place.order');
+Route::get('/buy/{id}', [BookController::class, 'BuyBook'])->middleware(['auth'])->name('buy.book');
 
 require __DIR__.'/auth.php';
 

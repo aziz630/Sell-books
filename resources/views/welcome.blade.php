@@ -78,7 +78,7 @@
 							<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 								<!--begin::Header Logo-->
 								<div class="header-logo">
-									<a href="index.html">
+									<a href="{{ url('/') }}">
 										<h4 style="color: black; text-transform: uppercase;" ><b> Old Bookstore </b></h4> 
 									</a>
 								</div>
@@ -87,8 +87,8 @@
 								<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 									<!--begin::Header Nav-->
 									<ul class="menu-nav">
-										<li class="menu-item menu-item-submenu menu-item-rel menu-item-active" data-menu-toggle="click" aria-haspopup="true">
-											<a href="javascript:;" class="menu-link menu-toggle">
+										<li class="menu-item menu-item-submenu menu-item-rel menu-item-active" >
+											<a href="{{ url('/') }}" >
 												<span class="menu-text">Home</span>
 												<i class="menu-arrow"></i>
 											</a>
@@ -330,10 +330,11 @@
 															<div class="bgi-no-repeat bgi-size-cover rounded min-h-200px w-100" style="background-image: url({{ asset('upload/book_img/'.$book->photo) }})"></div>
 															<!--end::Image-->
 															<!--begin::Title-->
-															<a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{ $book->book_title }}</a>
+															<a href="{{ route('buy.book', $book->id) }}" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{ $book->book_title }}</a>
 															<!--end::Title-->
 															<!--begin::Text-->
-															<div class="font-weight-bold text-dark-50 font-size-sm pb-7">{{ $book->author }}</div>
+															<div class="font-weight-bold text-dark-50 font-size-sm pb-0">{{ $book->author }}</div>
+															<div class="font-weight-bold text-dark-50 font-size-sm pb-5">{{ $book->price }} £</div>
 															<!--end::Text-->
 														</div>
 														<!--end::Header-->
@@ -370,15 +371,15 @@
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted font-weight-bold mr-2">2020©</span>
-								<a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Keenthemes</a>
+								<span class="text-muted font-weight-bold mr-2">2023©</span>
+								<a href="#" target="_blank" class="text-dark-75 text-hover-primary">Old Books Store</a>
 							</div>
 							<!--end::Copyright-->
 							<!--begin::Nav-->
 							<div class="nav nav-dark">
-								<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-5">About</a>
-								<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-5">Team</a>
-								<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
+								<a href="#" target="_blank" class="nav-link pl-0 pr-5">About</a>
+								<a href="#" target="_blank" class="nav-link pl-0 pr-5">Team</a>
+								<a href="#" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
 							</div>
 							<!--end::Nav-->
 						</div>
