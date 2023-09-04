@@ -22,11 +22,6 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [BookController::class, 'getAllBooks'])->name('user.welcome');
 Route::get('/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
-Route::get('/dashboard', function () {
-    $page_title = 'Admin Dashboard';
-    
-    return view('admin.index', compact('page_title'));
-})->middleware(['auth'])->name('dashboard');
 Route::post('/search_book', [BookController::class, 'getAllBooks'])->name('search.book');
 Route::post('/sell', [BookController::class, 'bookSell'])->name('book.sell');
 Route::get('/sell_book', [BookController::class, 'SellBook'])->name('sell.book');
@@ -37,6 +32,11 @@ require __DIR__.'/auth.php';
 
 // Book Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        $page_title = 'Admin Dashboard';
+        
+        return view('admin.index', compact('page_title'));
+    })->name('dashboard');
     
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
     Route::get('/add_book', [BookController::class, 'AddBook'])->name('add.book');
