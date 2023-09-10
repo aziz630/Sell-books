@@ -312,46 +312,23 @@
 								</div>
 							</form>
 								<!--begin::Row-->
+								
 								<div class="row">
 									@foreach($get_all_books as $key => $book)
 									
-									<div class="col-xl-4">
-										<!--begin::Nav Panel Widget 3-->
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body">
-												<!--begin::Wrapper-->
-												<div class="d-flex justify-content-between flex-column h-100">
-													<!--begin::Container-->
-													<div class="h-100">
-														<!--begin::Header-->
-														<div class="d-flex flex-column flex-center">
-															<!--begin::Image-->
-															<div class="bgi-no-repeat bgi-size-cover rounded min-h-200px w-100" style="background-image: url({{ asset('upload/book_img/'.$book->photo) }})"></div>
-															<!--end::Image-->
-															<!--begin::Title-->
-															<a href="{{ route('buy.book', $book->id) }}" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{ $book->book_title }}</a>
-															<!--end::Title-->
-															<!--begin::Text-->
-															<div class="font-weight-bold text-dark-50 font-size-sm pb-0">{{ $book->author }}</div>
-															<div class="font-weight-bold text-dark-50 font-size-sm pb-5">{{ $book->price }} £</div>
-															<!--end::Text-->
-														</div>
-														<!--end::Header-->
-														
-													</div>
-													<!--eng::Container-->
-													<!--begin::Footer-->
-													<div class="d-flex flex-center" id="kt_sticky_toolbar_chat_toggler_2" data-toggle="tooltip" title="" data-placement="right" data-original-title="Chat Example">
-														<a href="{{ route('buy.book', $book->id) }}" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">Buy Book</a>
-													</div>
-													<!--end::Footer-->
-												</div>
-												<!--end::Wrapper-->
+									
+									<div class="col-md-4">
+										<div class="card p-5 shadow " >
+											<img src="{{ asset('upload/book_img/'.$book->photo) }}" class="card-img-top" alt="...">
+											<div class="card-body" style="padding-top: 0px">
+											  <h5 class="card-title mb-2 text-center"> <a href="{{ route('buy.book', $book->id) }}" target="_blank" rel="noopener noreferrer"><b> {{ $book->book_title }} </b></a> </h5>
+											  <p class="text-center mb-0">{{ $book->author }}</p>
+											  <p class="text-center">£{{ $book->price }}</p>
+											  <div class="d-flex flex-center">
+												<a href="{{ route('buy.book', $book->id) }}" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">Buy Book</a>
 											</div>
-											<!--end::Body-->
-										</div>
-										<!--end::Nav Panel Widget 3-->
+											</div>
+										  </div>
 									</div>
 
 									@endforeach
