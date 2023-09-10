@@ -3,8 +3,10 @@
     <!--begin::Brand-->
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
-        <a href="index.html" class="brand-logo">
-            <img alt="Logo" src="assets/media/logos/logo-light.png" />
+        <a href="{{ url('admin/dashboard') }}">
+            {{-- <img alt="Logo" src="assets/media/logos/logo-light.png" /> --}}
+			<h4 style=" text-transform: uppercase;" ><b> Old Bookstore </b></h4> 
+
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->

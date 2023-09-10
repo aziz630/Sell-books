@@ -78,7 +78,7 @@
 							<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 								<!--begin::Header Logo-->
 								<div class="header-logo">
-									<a href="index.html">
+									<a href="{{ url('/') }}">
 										<h4 style="color: black; text-transform: uppercase;"><b> Old Bookstore </b></h4> 
 									</a>
 								</div>
@@ -88,7 +88,7 @@
 									<!--begin::Header Nav-->
 									<ul class="menu-nav">
 										<li class="menu-item menu-item-submenu menu-item-rel menu-item-active" data-menu-toggle="click" aria-haspopup="true">
-											<a href="javascript:;" class="menu-link menu-toggle">
+											<a href="{{ url('/') }}">
 												<span class="menu-text">Home</span>
 												<i class="menu-arrow"></i>
 											</a>
@@ -204,7 +204,7 @@
 									@auth
 									<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
+										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->name }}</span>
 										<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
 											<span class="symbol-label font-size-h5 font-weight-bold">S</span>
 										</span>
@@ -303,11 +303,12 @@
 												
 											</div>
 											<!--begin::Form-->
-											<form class="form" action="{{ url('place_order') }}" method="post">
+											<form class="form" action="{{ url('stripe') }}">
                                             @csrf
 
                                                 <input type="hidden" name="stock_id" value="{{ $book[0]['stock_id'] }}">
                                                 <input type="hidden" name="book_id" value="{{ $book[0]['book_id'] }}">
+                                                <input type="hidden" name="price" value="{{ $book[0]['price'] }}">
 												<div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -357,7 +358,7 @@
                                                             Book Price :
                                                         </div> 
                                                         <div class="col-md-4">
-                                                            <b>{{ $book[0]['price'] }}</b>
+                                                            <b>£{{ $book[0]['price'] }}</b>
                                                         </div>
                                                       
                                                         <div class="col-md-2">
@@ -365,6 +366,21 @@
                                                         </div> 
                                                         <div class="col-md-4">
                                                             <b>{{ Auth::user()->phone }}</b>
+                                                        </div>
+                                                    </div>
+													<div class="row">
+                                                        <div class="col-md-2">
+                                                           
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                           
+                                                        </div>
+                                                      
+                                                        <div class="col-md-2">
+                                                            Address :
+                                                        </div> 
+                                                        <div class="col-md-4">
+                                                            <b>{{ Auth::user()->address }}</b>
                                                         </div>
                                                     </div>
                                                     <div class="card-header">
@@ -392,8 +408,8 @@
 												
 
 												<div class="card-footer">
-													<button type="submit" class="btn btn-primary mr-2">Place Order</button>
-													<a href="{{ url('/') }}" class="btn btn-secondary">Cancel</a>
+													<button type="submit" class="btn btn-primary mr-2">PROCEED TO CHECKOUT</button>
+													{{-- <a href="{{ url('/') }}" class="btn btn-secondary">Cancel</a> --}}
 												</div>
 											</form>
 											<!--end::Form-->
@@ -460,12 +476,12 @@
 				<!--begin::Header-->
 				<div class="d-flex align-items-center mt-5">
 					<div class="symbol symbol-100 mr-5">
-						<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+						<div class="symbol-label" style="background-image:url('{{ !empty(Auth::user()->photo) ? asset('upload/user_img/'.Auth::user()->photo) :  asset('upload/no_image.jpg') }}')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-						<div class="text-muted mt-1">Application Developer</div>
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->name }}</a>
+						<div class="text-muted mt-1">Book Store User</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
 								<span class="navi-link p-0 pb-2">
@@ -482,10 +498,10 @@
 											<!--end::Svg Icon-->
 										</span>
 									</span>
-									<span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+									<span class="navi-text text-muted text-hover-primary">{{ Auth::user()->email }}</span>
 								</span>
 							</a>
-							<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
+							<a href="{{ route('admin.logout') }}" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
 						</div>
 					</div>
 				</div>
